@@ -1,5 +1,17 @@
+const twilioService = require("../services/twilioService");
+const Order = require("../models/orderModel");
+
 const createOrder = (coffeeOrder, number) => {
   //create object to send to DB
+  const order = new Order({
+    number: number,
+    order: coffeeOrder,
+    state: "PENDING",
+  });
+
+  order.save();
+
+  // generate message to send back to to user
   let outputStr = "";
   for (let i = 0; i < coffeeOrder.length; i++) {
     outputStr +=
@@ -26,7 +38,7 @@ const createOrder = (coffeeOrder, number) => {
   ];
 
   let text = responseArr[Math.floor(Math.random() * responseArr.length)];
-  //   twilioSend.sendMessage(text, number);
+  twilioService.sendMessage(text, number);
   let response = {
     fulfillmentMessages: [
       {
@@ -40,16 +52,18 @@ const createOrder = (coffeeOrder, number) => {
   return response;
 };
 
-const confirmYes = () => {
+const confirmYes = (number) => {
   //update status in DB
-
+  Order.deleteMany({ number: number }).catch((err) => {
+    console.log("Error Deleting Document", err);
+  });
   responseArr = [
     "Coffee order placed, godspeed",
     "Your coffee will be ready in T-15m",
     "Order confirmed, enjoy your caffination",
   ];
   let text = responseArr[Math.floor(Math.random() * responseArr.length)];
-  //   twilioSend.sendMessage(text);
+  twilioService.sendMessage(text, number);
   let response = {
     fulfillmentMessages: [
       {

@@ -10,7 +10,9 @@ const dialogController = (req) => {
     );
     console.log("Order Start");
   } else if (intent == "order.confirm.yes") {
-    response = dialogService.confirmYes();
+    response = dialogService.confirmYes(
+      req.body.originalDetectIntentRequest.payload.number
+    );
     console.log("order confirm yes");
   }
   return response;

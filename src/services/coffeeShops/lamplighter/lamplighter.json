@@ -1,0 +1,21 @@
+{
+  "coffeeType": {
+    "coffee": "//*[@id=\"TmdXKv\"]/div/div/div/div/div/div[2]/div/div[1]/div/div/div",
+    "iced coffee": "//*[@id=\"TmdXKv\"]/div/div/div/div/div/div[2]/div/div[4]/div",
+    "mocha": "//*[@id=\"TmdXKv\"]/div/div/div/div/div/div[2]/div/div[10]/div/div/div",
+    "iced mocha": "//*[@id=\"TmdXKv\"]/div/div/div/div/div/div[2]/div/div[10]/div/div/div",
+    "cold brew": "//*[@id=\"TmdXKv\"]/div/div/div/div/div/div[2]/div/div[4]"
+  },
+  "milk": {
+    "almond": "//*[@id=\"app\"]/div[2]/div/div/div[1]/form/div[4]/div[2]/div/fieldset/div[3]/div"
+  },
+  "sweetener": {},
+  "size": {
+    "large": "20 oz",
+    "medium": "16 oz",
+    "small": "12 oz",
+    "icedsmall": "12 oz ICED",
+    "icedmedium": "16 oz ICED",
+    "icedlarge": "20 oz ICED"
+  }
+}

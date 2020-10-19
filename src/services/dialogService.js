@@ -1,5 +1,6 @@
 const twilioService = require("../services/twilioService");
 const Order = require("../models/orderModel");
+const lamplighter = require("./coffeeShops/lamplighter/lamplighterService");
 
 const createOrder = (coffeeOrder, number) => {
   //create object to send to DB
@@ -52,7 +53,11 @@ const createOrder = (coffeeOrder, number) => {
   return response;
 };
 
-const confirmYes = (number) => {
+const confirmYes = async (number) => {
+  let confirmedOrder = await Order.find({ number: number });
+  console.log(confirmedOrder);
+  twilioService.sendMessage("submitting order", number);
+  await lamplighter.placeOrder(confirmedOrder[0].order);
   //update status in DB
   Order.deleteMany({ number: number }).catch((err) => {
     console.log("Error Deleting Document", err);

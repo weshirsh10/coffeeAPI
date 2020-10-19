@@ -13,7 +13,6 @@ const dialogController = (req) => {
     response = dialogService.confirmYes(
       req.body.originalDetectIntentRequest.payload.number
     );
-    console.log("order confirm yes");
   }
   return response;
 };
